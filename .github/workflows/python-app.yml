@@ -2,38 +2,31 @@ name: Python Calculator CI
 
 on:
   push:
-    branches: ["main"]
-    paths:
-      - "index.html"
-      - "**.py"
-      - "requirements.txt"
-
+    branches: [ "main" ]
   pull_request:
-    branches: ["main"]
-    paths:
-      - "index.html"
-      - "**.py"
-      - "requirements.txt"
+    branches: [ "main" ]
 
 jobs:
-  test:
-
+  build:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Clonar repositorio
-        uses: actions/checkout@v3
+    - uses: actions/checkout@v3
 
-      - name: Configurar Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: "3.10"
+    - name: Instalar Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: "3.10"
 
-      - name: Instalar dependencias
-        run: |
-          python -m pip install --upgrade pip
-          pip install -r requirements.txt
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
 
-      - name: Ejecutar pruebas
-        run: |
-          pytest
+    - name: Ejecutar pruebas
+      run: pytest
+      
+    - name: Instalar dependencias
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
