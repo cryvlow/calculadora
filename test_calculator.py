@@ -1,7 +1,7 @@
 from calculator import sumar, restar, multiplicar, dividir
 
 def test_sumar():
-    assert sumar(2, 3) == 5
+    assert sumar(2, 3) == 50
 
 def test_restar():
     assert restar(5, 3) == 2
